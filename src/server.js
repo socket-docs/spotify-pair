@@ -19,6 +19,16 @@ io.on('connection', socket => {
   console.log('finally i am connceted !!!');
   let payload = 'ibrahim banat';
   io.emit('front', payload);
+
+  socket.on('play', () => {
+    io.emit('play-handled', { name: 'novmber rain' });
+  });
+  socket.on('stop', () => {
+    io.emit('stop-handled', { name: 'video is stopped' });
+  });
+  socket.on('pasue', () => {
+    io.emit('pause-handled', { name: 'video is paused' });
+  });
 });
 
 module.exports = port => {
