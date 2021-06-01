@@ -27,3 +27,15 @@ module.exports = port => {
     console.log(`server is running at http://localhost:${port}`);
   });
 };
+
+/**
+ * handling spotify
+ *
+ */
+
+/**
+ *
+ *
+ * chat room functionality
+ *
+ */
