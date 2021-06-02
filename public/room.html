@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>TwitFlix</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+      integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>NetWatch</h1>
+    <!-- src="https://www.youtube.com/embed/8SbUC-UaAxE" -->
+    <iframe
+      id="video"
+      width="560"
+      height="315"
+      src=""
+      allow="autoplay"
+      allowfullscreen
+    ></iframe>
+    <button id="play">Play</button>
+    <button id="pause">Pause</button>
+    <button id="stop">Stop</button>
+
+    <form action="" id="song__form">
+      <input type="text" id="song__link" name="song" />
+      <button id="submit">Submit</button>
+    </form>
+    <div class="share">
+      <button id="room">SHARE ROOM</button>
+    </div>
+    <script src="./js/app.js"></script>
+  </body>
+</html>

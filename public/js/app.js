@@ -16,6 +16,12 @@ socket.on('hello-mf', payload => {
   console.log(payload);
 });
 
+$('#room').click(function (e) {
+  e.preventDefault();
+  $(`<div>share this id with your friends: ${room}</div>`).appendTo('.share');
+  $('#room').unbind('click');
+});
+
 $('#play').click(function (e) {
   e.preventDefault();
   console.log('i exist');
@@ -33,8 +39,13 @@ $('#pause').click(function (e) {
 /*********** FORM *********/
 $('#song__form').submit(function (e) {
   e.preventDefault();
-  let x = e.target.song.value;
-  console.log(x);
+  let fullLink = e.target.song.value;
+  if (fullLink.includes('=')) {
+    let link = fullLink.indexOf('=');
+    // console.log('contains');
+    let id = fullLink.slice(link + 1, link + 12);
+    socket.emit('video-id', { videoId: id, roomId: room });
+  }
 });
 
 /**
@@ -62,5 +73,9 @@ socket.on('pause-handled', payload => {
     '{"event":"command","func":"' + 'pauseVideo' + '","args":""}',
     '*'
   );
+});
+socket.on('embed-id', payload => {
+  let videoLink = `https://www.youtube.com/embed/${payload}?enablejsapi=1&version=3&playerapiid=ytplayer&autoplay=0&controls=0`;
+  $('#video').attr('src', videoLink);
 });
 // https://www.youtube.com/embed/dLnlQwwL3Wk?enablejsapi=1&version=3&playerapiid=ytplayer&autoplay=1&controls=0

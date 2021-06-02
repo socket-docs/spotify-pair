@@ -18,7 +18,11 @@ router.get('/createId', async (req, res) => {
   res.redirect(`/${record.routeId}`);
 });
 router.get('/:id', (req, res) => {
-  res.sendFile('index.html', { root: path.join(__dirname, '../public') });
+  res.sendFile('room.html', { root: path.join(__dirname, '../public') });
+});
+router.post('/joinRoom', (req, res) => {
+  let roomId = req.body.name;
+  res.redirect(`/${roomId}`);
 });
 
 module.exports = router;

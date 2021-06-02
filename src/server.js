@@ -35,6 +35,9 @@ io.on('connection', socket => {
   socket.on('pasue', roomId => {
     io.to(roomId).emit('pause-handled', { name: 'video is paused' });
   });
+  socket.on('video-id', payload => {
+    io.to(payload.roomId).emit('embed-id', payload.videoId);
+  });
 });
 
 module.exports = port => {
