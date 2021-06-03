@@ -12,7 +12,7 @@ socket.emit('assign-me', room);
 //   '*',
 //   console.log('ready to play')
 // );
-socket.on('hello-mf', payload => {
+socket.on('hello', payload => {
   console.log(payload);
 });
 
@@ -79,3 +79,37 @@ socket.on('embed-id', payload => {
   $('#video').attr('src', videoLink);
 });
 // https://www.youtube.com/embed/dLnlQwwL3Wk?enablejsapi=1&version=3&playerapiid=ytplayer&autoplay=1&controls=0
+
+/******************************** chattign****************************/
+
+const messageContainer = document.getElementById('message-container');
+const messageForm = document.getElementById('send-container');
+const messageInput = document.getElementById('message-input');
+const name = prompt('What is your name?');
+appendMessage('You joined');
+socket.emit('new-user', { name: name, roomId: room });
+
+socket.on('user-connected', name => {
+  appendMessage(`${name} is connected`);
+});
+socket.on('user-disconnected', name => {
+  appendMessage(`${name} disconnected`);
+});
+socket.on('chat-message', data => {
+  console.log(data);
+  appendMessage(`${data.name}: ${data.message}`);
+});
+messageForm.addEventListener('submit', e => {
+  e.preventDefault();
+  console.log('form is working');
+  const message = messageInput.value;
+  appendMessage(`You: ${message}`);
+  socket.emit('send-chat-message', { message: message, roomId: room });
+  messageInput.value = '';
+});
+appendMessage;
+function appendMessage(message) {
+  const messageElement = document.createElement('div');
+  messageElement.innerText = message;
+  messageContainer.append(messageElement);
+}

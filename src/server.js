@@ -10,7 +10,7 @@ const io = socket(server, {
   cors: { origin: '*' },
 });
 const router = require('./Router');
-
+const users = {};
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -24,7 +24,7 @@ io.on('connection', socket => {
   socket.on('assign-me', payload => {
     socket.join(payload);
 
-    io.to(payload).emit('hello-mf', { hi: 'hi', id: payload });
+    io.to(payload).emit('hello', { hi: 'hi', id: payload });
   });
   socket.on('play', roomId => {
     io.to(roomId).emit('play-handled', { name: 'novmber rain' });
@@ -38,6 +38,29 @@ io.on('connection', socket => {
   socket.on('video-id', payload => {
     io.to(payload.roomId).emit('embed-id', payload.videoId);
   });
+  socket.on('new-user', payload => {
+    users[socket.id] = payload.name;
+    socket.broadcast.to(payload.roomId).emit('user-connected', payload.name);
+  });
+  socket.on('send-chat-message', payload => {
+    socket.broadcast.to(payload.roomId).emit('chat-message', {
+      message: payload.message,
+      name: users[socket.id],
+    });
+  });
+  socket.on('disconnect', () => {
+    let socketSet = socket.rooms;
+    console.log(socketSet);
+    let soketSetInstance = socketSet.values();
+    console.log(soketSetInstance);
+    soketSetInstance.next().value;
+    let roomId = soketSetInstance.next().value;
+    console.log(roomId);
+    socket.broadcast
+      .to(roomId)
+      .emit('user-disconnected', { name: users[socket.id] });
+  });
+  delete users[socket.id];
 });
 
 module.exports = port => {
@@ -46,6 +69,17 @@ module.exports = port => {
     console.log(`server is running at http://localhost:${port}`);
   });
 };
+// io.sockets.on('connection', function(socket) {
+//   var currentRoomId;
+//   socket.on('join', function(roomId) {
+//     socket.join(roomId);
+//     currentRoomId = roomId;
+//   });
+
+//  socket.on('disconnect', function() {
+//    socket.broadcast.in(currentRoomId).emit('user:left', socket.id);
+//  });
+// }
 
 /**
  * handling spotify
