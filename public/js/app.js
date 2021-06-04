@@ -15,6 +15,7 @@ socket.emit('assign-me', room);
 socket.on('hello', payload => {
   console.log(payload);
 });
+socket.emit('queue-check',{roomId: room });
 
 $('#room').click(function (e) {
   e.preventDefault();
@@ -92,8 +93,8 @@ socket.emit('new-user', { name: name, roomId: room });
 socket.on('user-connected', name => {
   appendMessage(`${name} is connected`);
 });
-socket.on('user-disconnected', name => {
-  appendMessage(`${name} disconnected`);
+socket.on('user-disconnected', payload => {
+  appendMessage(`${payload.name} disconnected`);
 });
 socket.on('chat-message', data => {
   console.log(data);

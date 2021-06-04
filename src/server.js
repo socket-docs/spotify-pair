@@ -9,8 +9,11 @@ const socket = require('socket.io');
 const io = socket(server, {
   cors: { origin: '*' },
 });
+
 const router = require('./Router');
 const users = {};
+const roomsIds = {};
+const roomVideo = {};
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -23,8 +26,18 @@ io.on('connection', socket => {
   io.emit('front', payload);
   socket.on('assign-me', payload => {
     socket.join(payload);
+    roomsIds[socket.id] =payload;
 
     io.to(payload).emit('hello', { hi: 'hi', id: payload });
+  });
+
+  socket.on('queue-check', payload =>{
+    console.log('in-check');
+
+    if(Object.keys(roomVideo).includes(payload.roomId) ){
+      io.to(payload.roomId).emit('embed-id', roomVideo[payload.roomId]);
+
+    }
   });
   socket.on('play', roomId => {
     io.to(roomId).emit('play-handled', { name: 'novmber rain' });
@@ -37,6 +50,8 @@ io.on('connection', socket => {
   });
   socket.on('video-id', payload => {
     io.to(payload.roomId).emit('embed-id', payload.videoId);
+    roomVideo[payload.roomId]=  payload.videoId; 
+
   });
   socket.on('new-user', payload => {
     users[socket.id] = payload.name;
@@ -49,13 +64,9 @@ io.on('connection', socket => {
     });
   });
   socket.on('disconnect', () => {
-    let socketSet = socket.rooms;
-    console.log(socketSet);
-    let soketSetInstance = socketSet.values();
-    console.log(soketSetInstance);
-    soketSetInstance.next().value;
-    let roomId = soketSetInstance.next().value;
-    console.log(roomId);
+    // let socketSet = socket.id;
+    console.log(roomsIds[socket.id] );
+    const roomId = roomsIds[socket.id];
     socket.broadcast
       .to(roomId)
       .emit('user-disconnected', { name: users[socket.id] });
