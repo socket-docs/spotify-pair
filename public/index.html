@@ -4,9 +4,48 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TwitFlix</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Twinflix</title>
   </head>
   <body>
+    <header class="header">
+      <div class="s__name"><a class="name" href="/">Twinflix</a></div>
+      <nav>
+        <li class="about">About</li>
+        <li class="buy">Buy us a coffee</li>
+        <li class="buy">Rooms</li>
+      </nav>
+    </header>
+    <main>
+      <section class="hero">
+        <div class="hero__rCtr">
+          <h1>Hang out whenever, wherever</h1>
+          <p>
+            Twinflix makes it easy and fun to watch with your favourite people.
+          </p>
+        </div>
+        <div class="hero__lCtr">
+          <img src="./assets/hero.png" alt="" />
+        </div>
+      </section>
+      <section>
+        <div>
+          <img
+            src="./assets/YouTube-Logo.wine.svg"
+            alt=""
+            width="200px"
+            height="200px"
+          />
+        </div>
+        <h2>
+          Twinflix is a new way to hang out with your favorite people and watch
+          youtube togther.
+        </h2>
+        <form action="/createId" type="hidden">
+          <button class="create">Create Room</button>
+        </form>
+      </section>
+    </main>
     <form action="/createId" type="hidden">
       <button>CREATE ROOM</button>
     </form>
