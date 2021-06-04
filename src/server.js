@@ -14,6 +14,7 @@ const router = require('./Router');
 const users = {};
 const roomsIds = {};
 const roomVideo = {};
+const massages  = {};
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -33,6 +34,8 @@ io.on('connection', socket => {
 
   socket.on('queue-check', payload =>{
     console.log('in-check');
+    // if messages in q  send me the message
+    // room dependent  
 
     if(Object.keys(roomVideo).includes(payload.roomId) ){
       io.to(payload.roomId).emit('embed-id', roomVideo[payload.roomId]);
@@ -58,7 +61,9 @@ io.on('connection', socket => {
     socket.broadcast.to(payload.roomId).emit('user-connected', payload.name);
   });
   socket.on('send-chat-message', payload => {
-    socket.broadcast.to(payload.roomId).emit('chat-message', {
+      //savemassage 
+    // data base massages user // time stamps // time stamps // momento ? // data base ? SQL // normal 
+      socket.broadcast.to(payload.roomId).emit('chat-message', {
       message: payload.message,
       name: users[socket.id],
     });

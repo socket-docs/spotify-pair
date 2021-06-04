@@ -9,7 +9,7 @@ const uuid = require('uuid').v4;
 
 let router = express.Router();
 const path = require('path');
-// const checkRoomId = require('')
+const checkRoomId = require('./middlewares/checkid.js');
 
 router.get('/createId', async (req, res) => {
   let idx = uuid();
@@ -18,7 +18,7 @@ router.get('/createId', async (req, res) => {
   const record = await room.save();
   res.redirect(`/${record.routeId}`);
 });
-router.get('/:id' ,(req, res) => {
+router.get('/:id',checkRoomId,(req, res) => {
   res.sendFile('room.html', { root: path.join(__dirname, '../public') });
 });
 router.post('/joinRoom', (req, res) => {
