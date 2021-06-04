@@ -6,13 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css" />
     <title>Twinflix</title>
+    <link rel="icon" href="./assets/logo.svg" type="image/gif" sizes="16x16" />
   </head>
   <body>
     <header class="header">
-      <div class="s__name"><a class="name" href="/">Twinflix</a></div>
+      <div class="s__name">
+        <img src="./assets/logo.svg" alt="" width="30" height="60px" />
+        <a class="name" href="/">Twinflix</a>
+      </div>
       <nav>
         <li class="about">About</li>
-        <li class="buy">Buy us a coffee</li>
+        <li class="buy">Join a Room</li>
         <li class="buy">Rooms</li>
       </nav>
     </header>
@@ -28,8 +32,8 @@
           <img src="./assets/hero.png" alt="" />
         </div>
       </section>
-      <section>
-        <div>
+      <section class="room">
+        <div class="yt-s">
           <img
             src="./assets/YouTube-Logo.wine.svg"
             alt=""
@@ -37,23 +41,30 @@
             height="200px"
           />
         </div>
-        <h2>
-          Twinflix is a new way to hang out with your favorite people and watch
-          youtube togther.
-        </h2>
-        <form action="/createId" type="hidden">
-          <button class="create">Create Room</button>
-        </form>
+        <div class="room__form">
+          <h2>
+            Twinflix is a new way to hang out with your favorite people and
+            watch youtube togther.
+          </h2>
+          <form action="/createId" type="hidden" class="hidden__form">
+            <button class="create roo">Create Room</button>
+          </form>
+        </div>
+      </section>
+      <section>
+        <div>
+          <h2>No account needed to join.</h2>
+          <p>Join an open room with a ID, even if you don’t have an account.</p>
+        </div>
+        <div>
+          <form action="/joinRoom" type="hidden" method="POST">
+            <input type="text" required name="name" />
+            <button>JOIN</button>
+          </form>
+        </div>
       </section>
     </main>
-    <form action="/createId" type="hidden">
-      <button>CREATE ROOM</button>
-    </form>
-    <!-- <button id="search">Join A Room</button> -->
-    <form action="/joinRoom" type="hidden" method="POST">
-      <input type="text" required name="name" />
-      <button>JOIN</button>
-    </form>
+
     <script src="./js/home.js"></script>
   </body>
 </html>
