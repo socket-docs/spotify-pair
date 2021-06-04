@@ -51,16 +51,31 @@
           </form>
         </div>
       </section>
-      <section>
-        <div>
-          <h2>No account needed to join.</h2>
-          <p>Join an open room with a ID, even if you don’t have an account.</p>
+      <section class="join__room">
+        <div class="left__join">
+          <h2>
+            No account needed<br />
+            to join.
+          </h2>
+          <p>
+            Join an open room with an ID, even if you <br />don't have an
+            account.
+          </p>
+          <div class="form__left">
+            <form action="/joinRoom" type="hidden" method="POST">
+              <input
+                type="text"
+                required
+                name="name"
+                class="join__input"
+                autocomplete="off"
+              />
+              <button id="join">Join</button>
+            </form>
+          </div>
         </div>
-        <div>
-          <form action="/joinRoom" type="hidden" method="POST">
-            <input type="text" required name="name" />
-            <button>JOIN</button>
-          </form>
+        <div class="r__img">
+          <img src="./assets/man.png" alt="" width="300px" height="300px" />
         </div>
       </section>
     </main>

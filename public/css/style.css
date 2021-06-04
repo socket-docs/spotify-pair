@@ -49,7 +49,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: sticky;
+  /* position: fixed; */
   z-index: 2;
   padding: 0 50px;
   height: 75px;
@@ -228,4 +228,57 @@ nav {
 .hidden__form {
   display: flex;
   align-self: center;
+}
+
+/******* JOIN ROOM ********/
+
+.join__room {
+  height: 100vh;
+  display: flex;
+  padding: 0 50px;
+  padding-top: 100px;
+  width: 100%;
+  justify-content: space-between;
+}
+.left__join h2 {
+  font-size: 65px;
+  line-height: 75px;
+  font-weight: 700;
+  line-break: strict;
+  color: #0a7cff;
+}
+
+.left__join p {
+  color: #595959;
+  letter-spacing: 2px;
+  font-size: 22px;
+  margin-bottom: 75px;
+}
+.r__img img {
+  margin-top: 50px;
+}
+.join__input {
+  width: 335px;
+  height: 40px;
+  border-radius: 10px;
+  outline: none;
+  border: 1.5px solid #595959;
+  background: transparent;
+}
+.form__left form {
+  width: 100%;
+}
+#join {
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid #0a7cff;
+  background-color: #0a7cff;
+  color: #e9eef5;
+}
+#join:hover {
+  background-color: #a033ff;
+  transition: all 1s ease;
+  border: #a033ff 1px solid;
+  cursor: pointer;
 }
