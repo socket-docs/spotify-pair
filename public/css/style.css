@@ -291,21 +291,19 @@ nav {
   cursor: pointer;
 }
 
-
-#divContainer{
+#divContainer {
+  padding-top: 100px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  
 }
 
-#vedioButton{
+#vedioButton {
   display: flex;
   flex-direction: row;
   /* justify-content: space-around; */
 }
 
-#headerNet{
- 
+#headerNet {
   background-color: #fff;
   background-image: linear-gradient(
     81.84deg,
@@ -319,17 +317,16 @@ nav {
   -moz-background-clip: text;
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
-
 }
-#roomBody{
+#roomBody {
   margin-left: 20px;
 }
-iframe{
-  border:solid 2.5px #0099ff;
+iframe {
+  border: solid 2.5px #0099ff;
   border-radius: 10px;
   margin-bottom: 20px;
 }
-#vedioButton button{
+#vedioButton button {
   width: 100px;
   height: 30px;
   border-radius: 10px;
@@ -339,21 +336,21 @@ iframe{
   margin-right: 15px;
   margin-bottom: 30px;
 }
-#vedioButton button:hover{
+#vedioButton button:hover {
   background-color: #a033ff;
   transition: all 1s ease;
   border: #a033ff 1px solid;
   cursor: pointer;
 }
 #song__form input {
-  border:solid 1px #0099ff;
+  border: solid 1px #0099ff;
   border-radius: 5px;
   margin-bottom: 10px;
   width: 340px;
   height: 30px;
 }
 
-#song__form button{
+#song__form button {
   width: 100px;
   height: 30px;
   border-radius: 10px;
@@ -364,7 +361,7 @@ iframe{
   margin-bottom: 20px;
 }
 
-#song__form button:hover{
+#song__form button:hover {
   background-color: #a033ff;
   transition: all 1s ease;
   border: #a033ff 1px solid;
@@ -377,8 +374,8 @@ iframe{
   margin-top: 15px;
   border-radius: 10px;
   font-weight: 1000;
-  border: 1px solid #a033ff ;
-   background-image: linear-gradient(
+  border: 1px solid #a033ff;
+  background-image: linear-gradient(
     81.84deg,
     #0099ff -9.4%,
     #a033ff 51.57%,
@@ -393,7 +390,7 @@ iframe{
 }
 
 #chatContainer {
-  border:solid 2.5px #0099ff;
+  border: solid 2.5px #0099ff;
   border-radius: 10px;
   margin-bottom: 10px;
   margin-right: 20px;
@@ -408,9 +405,9 @@ iframe{
   width: 100px;
   height: 30px;
   border-radius: 10px;
-  font-weight:1000;
-  border: 1px solid #a033ff ;
-   background-image: linear-gradient(
+  font-weight: 1000;
+  border: 1px solid #a033ff;
+  background-image: linear-gradient(
     81.84deg,
     #0099ff -9.4%,
     #a033ff 51.57%,
@@ -425,7 +422,7 @@ iframe{
 }
 
 #message-input {
-  border:solid 1px #0099ff;
+  border: solid 1px #0099ff;
   border-radius: 5px;
   margin-bottom: 10px;
   width: 340px;
@@ -433,14 +430,14 @@ iframe{
 }
 
 #message-container div {
-  background-color: #CCC;
+  background-color: #ccc;
   padding: 5px;
   color: #0a7cff;
   font-size: 20px;
   font-weight: 500;
 }
 #message-container div:nth-child(2n) {
-  background-color: #FFF;
+  background-color: #fff;
 }
 
 /********* animation ****/
@@ -543,4 +540,3 @@ iframe{
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(1, 126, 209);
 }
-
