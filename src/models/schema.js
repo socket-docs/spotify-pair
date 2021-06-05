@@ -3,6 +3,7 @@ const { Schema } = mongoose;
 
 const RoomSchema = mongoose.Schema({
   routeId: { type: String },
+  
 });
 
 const Rooms = mongoose.model('Rooms', RoomSchema);
