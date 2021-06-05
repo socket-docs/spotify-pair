@@ -1,6 +1,6 @@
 'use stric';
 var today = new Date();
-var time = today.getHours() + ":" + today.getMinutes() ;
+var time = today.getHours() + ':' + today.getMinutes();
 
 // const moment =require('moment');
 
@@ -19,7 +19,7 @@ socket.emit('assign-me', room);
 socket.on('hello', payload => {
   console.log(payload);
 });
-socket.emit('queue-check',{roomId: room });
+socket.emit('queue-check', { roomId: room });
 
 $('#room').click(function (e) {
   e.preventDefault();
@@ -96,25 +96,23 @@ const name = prompt('What is your name?');
 socket.on('old_massage', payload => {
   console.log('dd');
   console.log(payload.message);
-  if(payload.message === 0){
-    
-appendMessage(`You joined 🕜 ${time}`);
-socket.emit('new-user', { name: name, roomId: room });
+  if (payload.message === 0) {
+    appendMessage(`You joined 🕜 ${time}`);
+    socket.emit('new-user', { name: name, roomId: room });
   }
-  payload.message.forEach(element => {
-    appendMessage(`${element.name}: ${element.message} 🕜 ${element.time} `);
-  });
-  
+  if (payload.message) {
+    payload.message.forEach(element => {
+      appendMessage(`${element.name}: ${element.message} 🕜 ${element.time} `);
+    });
+  }
+
   // appendMessage(`${payload.name} :${payload.message}-------- `);
 });
 
 /********* */
 
-
 appendMessage(`You joined 🕜 ${time}`);
 socket.emit('new-user', { name: name, roomId: room });
-
-
 
 socket.on('user-connected', payload => {
   appendMessage(`${payload.name} is connected  🕜 ${payload.time}`);
