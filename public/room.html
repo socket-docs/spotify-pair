@@ -14,9 +14,22 @@
     ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
-  <body>
-    <h1>NetWatch</h1>
+  <header class="header">
+    <div class="s__name">
+      <img src="./assets/logo.svg" alt="" width="30" height="60px" />
+      <a class="name" href="/">Twinflix</a>
+    </div>
+    <nav>
+      <li class="about">About</li>
+      <li class="buy">Join a Room</li>
+      <li class="buy">Rooms</li>
+    </nav>
+  </header>
+  <body id="roomBody">
+    <h1 id="headerNet">NetWatch</h1>
     <!-- src="https://www.youtube.com/embed/8SbUC-UaAxE" -->
+    <div id="divContainer">
+    <section id="vedioContainer">
     <iframe
       id="video"
       width="560"
@@ -25,10 +38,11 @@
       allow="autoplay"
       allowfullscreen
     ></iframe>
+    <div id="vedioButton">
     <button id="play">Play</button>
     <button id="pause">Pause</button>
     <button id="stop">Stop</button>
-
+</div>
     <form action="" id="song__form">
       <input type="text" id="song__link" name="song" />
       <button id="submit">Submit</button>
@@ -36,14 +50,19 @@
     <div class="share">
       <button id="room">SHARE ROOM</button>
     </div>
-
-    <section>
+</section>
+<div id="boxChat">
+    <section id="chatContainer">
       <div id="message-container"></div>
+    </section>
       <form id="send-container">
+
         <input type="text" id="message-input" />
+
         <button type="submit" id="send-button">Send</button>
       </form>
-    </section>
+    
+  </div>
     <script src="./js/app.js"></script>
   </body>
 </html>
