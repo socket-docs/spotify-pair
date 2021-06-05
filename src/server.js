@@ -6,11 +6,16 @@ const app = express();
 const path = require('path');
 const server = require('http').createServer(app);
 const socket = require('socket.io');
+const moment =require('moment');
 const io = socket(server, {
   cors: { origin: '*' },
 });
 
 const router = require('./Router');
+// const { delete } = require('./Router');
+let messageArray = [];
+const roomsMassages = {};
+console.log(roomsMassages,'check');
 const users = {};
 const roomsIds = {};
 const roomVideo = {};
@@ -54,24 +59,73 @@ io.on('connection', socket => {
 
   });
   socket.on('new-user', payload => {
+    socket.emit('old_massage',{ message:roomsMassages[payload.roomId]})
+    console.log('********************',roomsMassages[payload.roomId])
     users[socket.id] = payload.name;
-    socket.broadcast.to(payload.roomId).emit('user-connected', payload.name);
+    socket.broadcast.to(payload.roomId).emit('user-connected',{name: payload.name ,time: moment().format('h:mm a'),}  );
   });
+
   socket.on('send-chat-message', payload => {
+    // if(!roomsMassages[payload.roomId]){
+    //   roomsMassages[payload.roomId] =[]
+    // }
+    // console.log(payload.roomId,'room Id-------')
+    // console.log(roomsMassages[payload.roomId]=[payload.roomId] );
+    // console.log({ message: payload.message,name: users[socket.id],},'obbbssssssssssssssssss');
+    if(roomsMassages[payload.roomId]){
+      messageArray =roomsMassages[payload.roomId];
+      messageArray.push( { message: payload.message, name: users[socket.id], time: moment().format('h:mm a'),});
+     roomsMassages[payload.roomId] = messageArray
+     messageArray =[];
+
+    }
+   
+   
+
+  // roomsMassages[payload.roomId].push( {message: payload.message, name: users[socket.id], time: moment().format('h:mm a'),});
+  // roomsMassages[payload.roomId] = messageArray
+
+   
+   
     socket.broadcast.to(payload.roomId).emit('chat-message', {
       message: payload.message,
       name: users[socket.id],
+      time: moment().format('h:mm a'),
+      
     });
+    // console.log(roomsMassages,'wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww')
+    // console.log('time ----- ' ,time)
   });
+ 
   socket.on('disconnect', () => {
     // let socketSet = socket.id;
     console.log(roomsIds[socket.id] );
     const roomId = roomsIds[socket.id];
+    
     socket.broadcast
       .to(roomId)
-      .emit('user-disconnected', { name: users[socket.id] });
+      .emit('user-disconnected', { name: users[socket.id], time: moment().format('h:mm a'), });
+       
+      console.log(io.sockets.adapter.rooms.get(roomId),'**********-**-*-**-*-*-**-*-')
+      if(!io.sockets.adapter.rooms.get(roomId)){
+      
+        delete roomsMassages[roomId];
+        console.log(roomsMassages ,'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq');
+      }
+     
+      // console.log(io.sockets.adapter.rooms.get(roomId).size === 0 , roomId ,'ddddddddddddddddddddddddddddddddddddddddddddd')
+      // delete roomsMassages[roomId];
+
+      //  if ( io.in(roomId).sockets){
+      //   io.in(roomId).sockets.sockets.forEach((socket,key)=>{
+      //     console.log(socket,'kkkkk');
+      //  })} 
+      
+    
+      delete users[socket.id];
   });
-  delete users[socket.id];
+  
+ 
 });
 
 module.exports = port => {
