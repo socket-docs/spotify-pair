@@ -1,4 +1,8 @@
 'use stric';
+var today = new Date();
+var time = today.getHours() + ":" + today.getMinutes() ;
+
+// const moment =require('moment');
 
 const socket = io();
 let room = window.location.href.split('/')[3];
@@ -87,24 +91,47 @@ const messageContainer = document.getElementById('message-container');
 const messageForm = document.getElementById('send-container');
 const messageInput = document.getElementById('message-input');
 const name = prompt('What is your name?');
-appendMessage('You joined');
+
+/******** */
+socket.on('old_massage', payload => {
+  console.log('dd');
+  console.log(payload.message);
+  if(payload.message === 0){
+    
+appendMessage(`You joined 🕜 ${time}`);
+socket.emit('new-user', { name: name, roomId: room });
+  }
+  payload.message.forEach(element => {
+    appendMessage(`${element.name}: ${element.message} 🕜 ${element.time} `);
+  });
+  
+  // appendMessage(`${payload.name} :${payload.message}-------- `);
+});
+
+/********* */
+
+
+appendMessage(`You joined 🕜 ${time}`);
 socket.emit('new-user', { name: name, roomId: room });
 
-socket.on('user-connected', name => {
-  appendMessage(`${name} is connected`);
+
+
+socket.on('user-connected', payload => {
+  appendMessage(`${payload.name} is connected  🕜 ${payload.time}`);
 });
 socket.on('user-disconnected', payload => {
-  appendMessage(`${payload.name} disconnected`);
+  appendMessage(`${payload.name} disconnected  🕜 ${payload.time}`);
 });
 socket.on('chat-message', data => {
-  console.log(data);
-  appendMessage(`${data.name}: ${data.message}`);
+  // console.log('----------------------------------------',data);
+  appendMessage(`${data.name}: ${data.message} 🕜 ${data.time}`);
 });
 messageForm.addEventListener('submit', e => {
   e.preventDefault();
   console.log('form is working');
   const message = messageInput.value;
-  appendMessage(`You: ${message}`);
+  var timeHour = time;
+  appendMessage(`You: ${message} 🕜 ${timeHour}`);
   socket.emit('send-chat-message', { message: message, roomId: room });
   messageInput.value = '';
 });
