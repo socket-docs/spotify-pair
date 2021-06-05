@@ -49,10 +49,11 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* position: fixed; */
+  position: fixed;
   z-index: 2;
   padding: 0 50px;
   height: 75px;
+  width: 100%;
 }
 
 .header nav {
@@ -139,7 +140,7 @@ nav {
 /******* hero *******/
 
 .hero {
-  height: calc(100vh - 75px);
+  height: 100vh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -154,7 +155,7 @@ nav {
   height: 500px;
   width: 500px;
   margin-left: 160px;
-  margin-top: 120px;
+  margin-top: 50px;
 }
 .hero__rCtr h1 {
   width: 100%;
@@ -247,6 +248,10 @@ nav {
   line-break: strict;
   color: #0a7cff;
 }
+.left__join h2:hover {
+  color: #a033ff;
+  transition: cubic-bezier(0.47, 0, 0.745, 0.715) 0.7s;
+}
 
 .left__join p {
   color: #595959;
@@ -265,6 +270,9 @@ nav {
   border: 1.5px solid #595959;
   background: transparent;
 }
+.join__input:active {
+  border: 1px solid #a033ff;
+}
 .form__left form {
   width: 100%;
 }
@@ -281,4 +289,105 @@ nav {
   transition: all 1s ease;
   border: #a033ff 1px solid;
   cursor: pointer;
+}
+
+/********* animation ****/
+
+.hero__lCtr > img {
+  transform: translatey(0px);
+  animation: 6s ease-in-out infinite float;
+}
+.name,
+.about,
+.buy {
+  animation: 1s ease slideFromTop;
+}
+.hero__rCtr,
+.hero__rCtr p,
+.hero__lCtr img {
+  animation: 1s ease slideFromBottom;
+}
+.animate__room {
+  animation: 1s ease slideFromTop;
+}
+@keyframes slideFromTop {
+  0% {
+    transform: translateY(-70px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes slideFromBottom {
+  0% {
+    transform: translateY(50px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes float {
+  0% {
+    transform: translatey(0px);
+  }
+  50% {
+    transform: translatey(-20px);
+  }
+  100% {
+    transform: translatey(0px);
+  }
+}
+.s__name > img {
+  animation: 2s linear 0s normal none ff;
+}
+@keyframes ff {
+  0% {
+    transform: translate(200px, -110px) rotate(-20deg) scale(0);
+  }
+  14% {
+    transform: translate(200px, -110px) rotate(-20deg) scale(0);
+  }
+  26% {
+    transform: translate(-50px, 0) rotate(0deg) scale(1);
+  }
+  99% {
+    transform: translate(20px, 0) rotate(0deg) scale(1);
+  }
+}
+@keyframes wipe-enter {
+  0% {
+    transform: scale(0, 0.025);
+  }
+  50% {
+    transform: scale(1, 0.025);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .square {
+    animation-name: wipe-enter;
+    animation-duration: 1s;
+  }
+}
+
+/*********** scrollbar *********/
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e9eef5;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0a7cff;
+  background-clip: padding-box;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(1, 126, 209);
 }
