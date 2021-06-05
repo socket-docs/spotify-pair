@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="./css/style.css" />
     <title>Twinflix</title>
     <link rel="icon" href="./assets/logo.svg" type="image/gif" sizes="16x16" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   </head>
   <body>
     <header class="header" id="header">
@@ -16,7 +18,7 @@
       </div>
       <nav>
         <li class="about">About</li>
-        <li class="buy" id="join__room">Join a Room</li>
+        <li class="about" id="join__room">Join a Room</li>
         <li class="buy" id="scr__room">Rooms</li>
       </nav>
     </header>
@@ -35,33 +37,42 @@
       <section class="room">
         <div class="yt-s">
           <img
+            data-aos="fade-down"
+            data-aos-duration="1000"
             src="./assets/YouTube-Logo.wine.svg"
             alt=""
             width="200px"
             height="200px"
+            class="yt__img"
           />
         </div>
         <div class="room__form">
-          <h2>
+          <h2 data-aos="fade-up" data-aos-duration="1000">
             Twinflix is a new way to hang out with your favorite people and
             watch youtube togther.
           </h2>
           <form action="/createId" type="hidden" class="hidden__form">
-            <button class="create roo">Create Room</button>
+            <button
+              class="create roo square"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+            >
+              Create Room
+            </button>
           </form>
         </div>
       </section>
       <section class="join__room">
         <div class="left__join">
-          <h2>
+          <h2 data-aos="fade-right">
             No account needed<br />
             to join.
           </h2>
-          <p>
+          <p data-aos="fade-right">
             Join an open room with an ID, even if you <br />don't have an
             account.
           </p>
-          <div class="form__left">
+          <div class="form__left" data-aos="fade-right">
             <form action="/joinRoom" type="hidden" method="POST">
               <input
                 type="text"
@@ -75,11 +86,21 @@
           </div>
         </div>
         <div class="r__img">
-          <img src="./assets/man.png" alt="" width="300px" height="300px" />
+          <img
+            src="./assets/man.png"
+            alt=""
+            width="300px"
+            height="300px"
+            data-aos="fade-right"
+          />
         </div>
       </section>
     </main>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
     <script src="./js/home.js"></script>
   </body>
 </html>

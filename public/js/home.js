@@ -1,9 +1,9 @@
 'use strict';
 let roomBtn = document.getElementById('scr__room');
 let roomSection = document.querySelector('.room');
-
 let joinRoomBtn = document.getElementById('join__room');
 let joinRoomSection = document.querySelector('.join__room');
+let isAnimated = false;
 
 roomBtn.addEventListener('click', function (event) {
   event.preventDefault();
