@@ -13,7 +13,7 @@ const io = socket(server, {
 
 const router = require('./Router');
 // const { delete } = require('./Router');
-let messageArray = [];
+// let messageArray = [];
 const roomsMassages = {};
 console.log(roomsMassages, 'check');
 const users = {};
@@ -65,22 +65,30 @@ io.on('connection', socket => {
       time: moment().format('h:mm a'),
     });
   });
-  socket.adapter.on('create-room', () => {
-    messageArray = [];
-  });
+
+  // socket.adapter.on('create-room', () => {
+  //   messageArray = [];
+  // });
 
   socket.on('send-chat-message', payload => {
     // if(!roomsMassages[payload.roomId]){
     //   roomsMassages[payload.roomId] =[]
     // }
 
-    messageArray.push({
-      message: payload.message,
-      name: users[socket.id],
-      time: moment().format('h:mm a'),
-    });
+    // messageArray.push({
+    //   message: payload.message,
+    //   name: users[socket.id],
+    //   time: moment().format('h:mm a'),
+    // });
 
-    roomsMassages[payload.roomId] = messageArray;
+    // roomsMassages[payload.roomId] = messageArray;
+
+    
+   if(!roomsMassages[payload.roomId]){
+    roomsMassages[payload.roomId]=[];
+   }
+
+   roomsMassages[payload.roomId]=[...roomsMassages[payload.roomId],{message: payload.message, name: users[socket.id], time: moment().format('h:mm a'),}];
 
     // console.log(payload.roomId,'room Id-------')
     // console.log(roomsMassages[payload.roomId]=[payload.roomId] );
