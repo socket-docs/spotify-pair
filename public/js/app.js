@@ -101,9 +101,13 @@ socket.on('old_massage', payload => {
 appendMessage(`You joined 🕜 ${time}`);
 socket.emit('new-user', { name: name, roomId: room });
   }
+ if(payload.message){
   payload.message.forEach(element => {
     appendMessage(`${element.name}: ${element.message} 🕜 ${element.time} `);
   });
+
+ }
+  
   
   // appendMessage(`${payload.name} :${payload.message}-------- `);
 });

@@ -13,7 +13,7 @@ const io = socket(server, {
 
 const router = require('./Router');
 // const { delete } = require('./Router');
-let messageArray = [];
+// let messageArray = [];
 const roomsMassages = {};
 console.log(roomsMassages,'check');
 const users = {};
@@ -72,17 +72,19 @@ io.on('connection', socket => {
     // console.log(payload.roomId,'room Id-------')
     // console.log(roomsMassages[payload.roomId]=[payload.roomId] );
     // console.log({ message: payload.message,name: users[socket.id],},'obbbssssssssssssssssss');
-    if(roomsMassages[payload.roomId]){
-      messageArray =roomsMassages[payload.roomId];
-      messageArray.push( { message: payload.message, name: users[socket.id], time: moment().format('h:mm a'),});
-     roomsMassages[payload.roomId] = messageArray
-     messageArray =[];
+    
+    //   messageArray =roomsMassages[payload.roomId];
+    //   messageArray.push( { message: payload.message, name: users[socket.id], time: moment().format('h:mm a'),});
+    //  roomsMassages[payload.roomId] = messageArray
+    
 
-    }
+    
    
-   
+   if(!roomsMassages[payload.roomId]){
+    roomsMassages[payload.roomId]=[];
+   }
 
-  // roomsMassages[payload.roomId].push( {message: payload.message, name: users[socket.id], time: moment().format('h:mm a'),});
+   roomsMassages[payload.roomId]=[...roomsMassages[payload.roomId],{message: payload.message, name: users[socket.id], time: moment().format('h:mm a'),}];
   // roomsMassages[payload.roomId] = messageArray
 
    
